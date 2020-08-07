@@ -1,36 +1,7 @@
 ## Source to script: Calc Surface Metrics
 
-## One raster
-calculate_gsm_local <- function(r){
-  
-  ## sa: Calculates the Average Roughness of a Surface
-  ## Finds the average roughness of a surface (Sa) as the absolute deviation of surface heights from the
-  ## mean surface height. 
-  GSM_sa <- sa(r)
-  
-  ## ssk: Calculates the Skewness of Raster Values
-  ## Skewness represents the asymmetry of the surface height distribution. 
-  GSM_ssk <- ssk(r, adj = TRUE)
-  
-  ## std: Texture Direction Metrics
-  ## Calculates the angle of dominating texture and the texture direction index of the Fourier spectrum
-  ## image calculated from a raster image (see Kedron et al. 2018)
-  
-  # calculate Std and Stdi
-  GSM_stdvals <- std(r)
-  
-  # extract each value
-  GSM_std <- GSM_stdvals[1]
-  GSM_stdi <- GSM_stdvals[2]
-  
-  result <- data.frame(sa=GSM_sa, ssk=GSM_ssk, std=GSM_std, stdi=GSM_stdi)
-  
-  return(result)
-  
-}
 
-## Loop for a list of rasters
-## Calculate gradient surface metrics
+## Calculate gradient surface metrics for a list of rasters
 
 calculate_gsm <- function(clip) {
   
@@ -92,6 +63,40 @@ calculate_gsm <- function(clip) {
   })
   
 }
+
+
+## Calculate gradient surface metrics for a single raster
+
+calculate_gsm_local <- function(r){
+  
+  ## sa: Calculates the Average Roughness of a Surface
+  ## Finds the average roughness of a surface (Sa) as the absolute deviation of surface heights from the
+  ## mean surface height. 
+  GSM_sa <- sa(r)
+  
+  ## ssk: Calculates the Skewness of Raster Values
+  ## Skewness represents the asymmetry of the surface height distribution. 
+  GSM_ssk <- ssk(r, adj = TRUE)
+  
+  ## std: Texture Direction Metrics
+  ## Calculates the angle of dominating texture and the texture direction index of the Fourier spectrum
+  ## image calculated from a raster image (see Kedron et al. 2018)
+  
+  # calculate Std and Stdi
+  GSM_stdvals <- std(r)
+  
+  # extract each value
+  GSM_std <- GSM_stdvals[1]
+  GSM_stdi <- GSM_stdvals[2]
+  
+  result <- data.frame(sa=GSM_sa, ssk=GSM_ssk, std=GSM_std, stdi=GSM_stdi)
+  
+  return(result)
+  
+}
+
+
+## The end
 
 
 
