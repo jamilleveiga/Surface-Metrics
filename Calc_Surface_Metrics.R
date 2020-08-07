@@ -42,8 +42,8 @@ crs(sampling_points)
 
 
 # Calculate metrics locally but overall printing progress
-#gsm <- calculate_gsm(clippings_elev)
-#save(gsm, file="./gsm_results/gsm_elevation.RData")
+gsm <- calculate_gsm(clippings_elev)
+save(gsm, file="./gsm_results/gsm_elevation.RData")
 load(file="./gsm_results/gsm_elevation.RData")
 
 # Bind to one dataframe
