@@ -1,6 +1,4 @@
-## Source to calculate Surface Metrics using geodiv package
-
-##Load raster
+## Source to script: Calc Surface Metrics
 
 ## One raster
 calculate_gsm_local <- function(r){
@@ -32,8 +30,6 @@ calculate_gsm_local <- function(r){
 }
 
 ## Loop for a list of rasters
-
-
 ## Calculate gradient surface metrics
 
 calculate_gsm <- function(clip) {
