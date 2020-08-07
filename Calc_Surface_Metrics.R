@@ -25,12 +25,6 @@ raster_name = "elevation"
 # # load the clippings
 clippings_elev <- readRDS("./ellipsoid_landscapes/clippings_flatten_elevation.rds")
 
-# load sampling points
-sampling_points <- raster::shapefile("coords/cha/charinus_shape_27samples.shp")
-crs(sampling_points)
-sampling_points <- spTransform(sampling_points, CRSobj = CRS(UTM_prj))
-crs(sampling_points)
-
 #### Specify metrics ####
 ## Make list to choose which surface metrics to calculate
 ## Not running yet
@@ -43,15 +37,14 @@ crs(sampling_points)
 
 # Calculate metrics locally but overall printing progress
 gsm <- calculate_gsm(clippings_elev)
-save(gsm, file="./gsm_results/gsm_elevation.RData")
-load(file="./gsm_results/gsm_elevation.RData")
+
+# May take a while to run, so save your results as RData to load them later
+#save(gsm, file="./gsm_results/gsm_elevation.RData")
+#load(file="./gsm_results/gsm_elevation.RData")
 
 # Bind to one dataframe
 gsm_data <- dplyr::bind_rows(gsm)
 head(gsm_data)
-nrow(gsm_data)
-
-gsm_data$sfd
 
 ## Save data
 write.csv(gsm_data, paste0("./gsm_results/gsm_data_", raster_name, "_", project_name, ".csv"), row.names = F)
